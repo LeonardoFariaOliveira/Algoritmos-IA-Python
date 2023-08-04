@@ -1,22 +1,23 @@
 import networkx as nx
 import itertools
 
-
-
 def hanoi_graph(discs):
 
     graph = nx.Graph()    
     permutations = list(itertools.product(list(range(1, 4)), repeat=discs))
 
+
     for permutation in permutations:
         a, b, c, d, e = permutation
-        
+        #(1, 1, 1, 1, 1)
         aux = 1
         while aux < discs-1:
 
             if aux != a:
                 graph.add_edge((a, b, c, d, e), (aux, b, c, d, e))
 
+    # 1 1 1 1 1 1
+                    # 2 1 1 1 1 1
             if aux != b and b != a and aux != a:
                 graph.add_edge((a, b, c, d, e), (a, aux, c, d, e))
 
@@ -139,7 +140,7 @@ def main():
     print("Caminho por profundidade: ", path, "Total de buscas: ", count, "\n\n")
 
     count=0
-    res = ids(graph, start, end, 50)
+    res = ids(graph, start, end, 20)
     if not res:
         print("Cidade não encontrada, pois o limite foi excedido")
         exit()
